@@ -11,13 +11,11 @@ class Card extends Component {
     }
 
     return (
-      <div>
-        <img 
-          style={elStyles}
-          src={image}
-          alt={`${value} of ${suit}`}
-        />
-      </div>
+      <img 
+        style={elStyles}
+        src={image}
+        alt={`${value} of ${suit}`}
+      />
     )
   }
 }
