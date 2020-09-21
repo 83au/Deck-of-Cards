@@ -1,0 +1,25 @@
+.Deck-btn {
+  display: block;
+  margin: 1rem auto;
+  padding: 8px 2rem;
+
+  border: 2px solid hsl(200, 100%, 50%);
+  border-radius: 6px;
+  background: none;
+  color: hsl(200, 100%, 50%);
+  cursor: pointer;
+  outline: none;
+}
+
+.Deck-btn:hover {
+  background: hsl(200, 100%, 50%);
+  color: white;
+}
+
+.Deck-cards {
+  position: relative;
+  margin: 5rem auto;
+
+  width: 50%;
+  text-align: center;
+}
