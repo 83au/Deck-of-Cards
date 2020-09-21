@@ -12,7 +12,7 @@ class Deck extends Component {
       remaining: 52,
       cards: [],
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.draw = this.draw.bind(this);
   }
 
 
@@ -23,18 +23,19 @@ class Deck extends Component {
   }
 
 
-  async handleClick() {
+  async draw() {
     const { deck_id } = this.state;
 
     try {
       const response = await axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/draw/`);
       const { remaining, cards: [{ image, value, suit }] } = response.data;
 
-      const r = Math.floor(Math.random() * 50);
-      const y = Math.floor(Math.random() * 50);
+      const rand = n => Math.floor(Math.random() * n);
 
-      const negR = Math.floor(Math.random() * 2) === 1 ? '' : '-';
-      const negY = Math.floor(Math.random() * 2) === 1 ? '' : '-';
+      const r = rand(40);
+      const y = rand(50);
+      const negR = rand(2) === 1 ? '' : '-';
+      const negY = rand(2) === 1 ? '' : '-';
 
       const styles = {
         position: 'absolute',
@@ -72,7 +73,7 @@ class Deck extends Component {
         <h1>Deck of Cards</h1>
         <button 
           className="Deck-btn" 
-          onClick={this.handleClick}
+          onClick={this.draw}
         >
           Draw Card
         </button>
