@@ -8,7 +8,6 @@ class Deck extends Component {
   constructor() {
     super();
     this.state = { 
-      deck_id: null, 
       remaining: 52,
       cards: [],
     };
@@ -19,15 +18,14 @@ class Deck extends Component {
   async componentDidMount() {
     const response = await axios.get('https://deckofcardsapi.com/api/deck/new/shuffle');
     const { deck_id, remaining } = response.data;
-    this.setState({ deck_id, remaining });
+    this.deck_id = deck_id;
+    this.setState({ remaining });
   }
 
 
   async draw() {
-    const { deck_id } = this.state;
-
     try {
-      const response = await axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/draw/`);
+      const response = await axios.get(`https://deckofcardsapi.com/api/deck/${this.deck_id}/draw/`);
       const { remaining, cards: [{ image, value, suit }] } = response.data;
 
       const rand = n => Math.floor(Math.random() * n);
@@ -47,8 +45,9 @@ class Deck extends Component {
         value,
         suit,
         styles,
-        id: Math.random()
+        id: value + suit
       }
+      
       this.setState({ cards: [...this.state.cards, card], remaining });
 
     } catch (err) {
